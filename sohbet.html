@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link href='https://atawho.blogspot.com.tr/favicon.ico' rel='icon' sizes='16x16' type='image/png'/>
+
+    <title>who</title>
+    <style>
+     
+
+      body { font: 13px Helvetica, Arial;     background: #000 url(http://mirr0r.org/images/bg.gif); background-color:#1a1a1a;}
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; border:2px solid #440000;}
+      form button {  background:#8c8c8c; border: none; padding: 10px; border:2px solid #440000;}
+      .orta #mesaj { list-style-type: none; margin: 0; padding: 0;     
+ }
+      .orta #mesaj li { padding: 5px 10px; background:darkslategray; }
+      .orta #mesaj li:nth-child(odd) { background: #eee; }
+      .yazan{ color:#440000; font-weight: bold; font-family:'Times New Roman', Times, serif; font-size:15px;}
+       .baslik{margin:auto; text-align: center; font-weight:bolder; max-width:1000px; height:40px; background-color: black; font-size: 25px; font-family: 'Orbitron', sans-serif; border:1px solid #440000; overflow:hidden;            }
+      .baslik font{color:gray !important;}
+     
+      #orta
+    {
+
+      margin:auto;
+    margin-top:2px;
+    background-color: #ccc;
+    border: 1px solid #440000;
+    height:500px;
+    max-width:1000px;
+          overflow-y: auto;
+
+    }
+    #aktif{
+      color:#440000;
+    }
+    .gonderilenb{
+      margin:auto; 
+      display:block; 
+      max-width:1000px;
+      border:1px solid #440000;
+    }
+    </style>
+  </head>
+
+  <body>
+      <div class="baslik"><font>Samurai Otağ v1.0 Beta versiyon</font></div>
+      <div class="orta" id="orta">
+    <ul id="mesaj" required="required"/></ul></div>
+    <form action="">
+<div class="gonderilenb">
+
+      <input id="m" autocomplete="off" /><button>Gönder</button>,
+      </div>
+    </form> 
+  <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script language="JavaScript">
+window.onbeforeunload=confirmExit;
+function confirmExit()
+{
+return "Bu sayfadan çıkmak istediğinize eminmisiniz?";
+}
+</script>
+    <script>
+
+      var socket = io();
+      var isimal=prompt("Kimseen?")
+
+  
+      $('form').submit(function(){
+        var neyazdi= $('#m').val();
+        socket.emit("banamusade",{"yazan":isimal,"yazdigi":neyazdi});
+    //    socket.emit('mesaj', $('#m').val());
+       $('#m').val('');
+        return false;
+      });
+  
+      socket.on('gerigeldim', function(data){
+        
+    
+        $('#mesaj').append('<font class="yazan">'+data.yazan+"</font><li>"+data.yazdigi);
+        $("#orta").scrollTop($("#orta").scrollTop() + 100); 
+
+          
+});
+
+
+</script>
+  </body>
+
+</html>
+
