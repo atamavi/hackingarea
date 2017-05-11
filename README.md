@@ -12,4 +12,5 @@ Başlatma
 
     node ./basla.js
 
+Kullanıcı adı ve şifre => who
 Eksikler hala vardır vakit buldukça gidereceğim sohbet de xss bulunmaktadıır.
